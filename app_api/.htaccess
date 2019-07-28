@@ -1,0 +1,13 @@
+RewriteEngine On
+
+RewriteRule ^(export) - [L]
+RewriteRule ^(resources) - [L]
+#RewritrRule ^(expt.php) - [L]
+
+RewriteBase /middleware/app_api/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+Options -Indexes
+
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteRule ^(.*)$ index.php?uri=$1 [QSA,L]
